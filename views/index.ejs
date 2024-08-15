@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Writer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-zinc-900 text-white">
+    <div class="flex justify-between h-screen">
+      <!-- Header -->
+      <header class="w-[20%] p-4 bg-zinc-800">
+        <h1 class="text-center text-2xl font-bold">Content Generator</h1>
+      </header>
+
+      <!-- Main Content Area -->
+      <main
+        class="w-[80%] flex flex-col items-center justify-center mt-auto mb-10"
+      >
+        <!-- Response Area -->
+        <% if (typeof generatedText !== 'undefined') { %>
+        <div
+          id="response"
+          class="mt-6 mb-3 p-4 bg-zinc-800 rounded-lg w-full max-w-2xl"
+        >
+          <p class="text-white"><%= generatedText %></p>
+        </div>
+        <% } %>
+        <form action="/generate" method="POST" class="w-full max-w-2xl">
+          <div class="flex gap-1">
+            <textarea
+              id="prompt"
+              name="prompt"
+              rows="1"
+              class="w-full p-4 resize-none text-black rounded-lg outline-none"
+              placeholder="Type your prompt here..."
+              required
+            ></textarea>
+            <div class="text-center">
+              <button
+                type="submit"
+                class="px-4 py-2 bg-zinc-600 hover:bg-zinc-800 rounded-lg text-white font-semibold"
+              >
+                Generate Text
+              </button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script>
+      const textarea = document.getElementById("prompt");
+
+      textarea.addEventListener("input", function () {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+      });
+    </script>
+  </body>
+</html>
